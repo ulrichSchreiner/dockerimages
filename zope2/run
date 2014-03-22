@@ -1,0 +1,15 @@
+#!/bin/bash
+
+INSTANCE_HOME="/instance"
+ZOPEBIN="/src/Zope/bin"
+
+if [ ! -d "$INSTANCE_HOME/etc" ]; then
+  $ZOPEBIN/mkzopeinstance -u zope:2epoz -d $INSTANCE_HOME
+  cp /src/zope.conf $INSTANCE_HOME/etc/
+fi
+
+CONFIG_FILE="$INSTANCE_HOME/etc/zope.conf"
+export INSTANCE_HOME
+
+exec $ZOPEBIN/runzope -C "$CONFIG_FILE" "$@" 
+
