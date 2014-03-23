@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INSTANCE_HOME="/instance"
+INSTANCE_HOME="/zope/instance"
 ZOPEBIN="/src/Zope/bin"
 
 if [ ! -d "$INSTANCE_HOME/etc" ]; then
