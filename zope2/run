@@ -1,11 +1,13 @@
 #!/bin/bash
 
-INSTANCE_HOME="/zope/instance"
+ZOPE_HOME="/zope"
+INSTANCE_HOME="$ZOPE_HOME/instance"
 ZOPEBIN="/src/Zope/bin"
 
 if [ ! -d "$INSTANCE_HOME/etc" ]; then
   $ZOPEBIN/mkzopeinstance -u zope:2epoz -d $INSTANCE_HOME
   cp /src/zope.conf $INSTANCE_HOME/etc/
+  chown -R zope:zope $ZOPE_HOME
 fi
 
 CONFIG_FILE="$INSTANCE_HOME/etc/zope.conf"

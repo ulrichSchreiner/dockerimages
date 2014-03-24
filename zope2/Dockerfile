@@ -22,15 +22,18 @@ ENV LC_ALL C.UTF-8
 #RUN pip install --index-url=http://download.zope.org/Zope2/index/2.13.21/ Zope2 zope.interface
 #RUN pip install boto==2.27.0
 RUN mkdir /src
+RUN mkdir /src/tmp
 RUN cd /src && git clone https://github.com/zopefoundation/Zope.git
-RUN pip install --upgrade setuptools==1.0
+RUN rm -rf /usr/local/lib/python2.7/dist-packages/setuptools*.egg
+RUN pip install --upgrade distribute==0.6.36
+RUN pip install --upgrade setuptools==0.7.2
 RUN cd /src/Zope && python bootstrap.py
 RUN cd /src/Zope && bin/buildout
 
-#RUN ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib
-#RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib
-#RUN ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib
-#RUN pip install PIL==1.1.7
+RUN ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib
+RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib
+RUN ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib
+RUN pip install PIL==1.1.7
 
 RUN useradd zope
 RUN echo "zope:zope" | chpasswd
@@ -42,5 +45,4 @@ ADD zope.conf /src/zope.conf
 
 EXPOSE 8080
 VOLUME /zope
-USER zope
 ENTRYPOINT /src/run
