@@ -17,18 +17,14 @@ RUN apt-get update && apt-get install -y \
 
 ENV LC_ALL C.UTF-8
 
-#RUN pip install zope.interface==4.1.1
-#RUN pip install Zope2==2.13.22
-#RUN pip install --index-url=http://download.zope.org/Zope2/index/2.13.21/ Zope2 zope.interface
-#RUN pip install boto==2.27.0
 RUN mkdir /src
-RUN mkdir /src/tmp
-RUN cd /src && git clone https://github.com/zopefoundation/Zope.git
-RUN rm -rf /usr/local/lib/python2.7/dist-packages/setuptools*.egg
-RUN pip install --upgrade distribute==0.6.36
-RUN pip install --upgrade setuptools==0.7.2
-RUN cd /src/Zope && python bootstrap.py
-RUN cd /src/Zope && bin/buildout
+
+ENV ZOPEVER 2.13.19
+RUN cd /src && wget http://pypi.python.org/packages/source/Z/Zope2/Zope2-$ZOPEVER.zip
+RUN cd /src && unzip Zope2-$ZOPEVER.zip
+RUN cd /src/Zope2-$ZOPEVER && python bootstrap.py
+RUN cd /src/Zope2-$ZOPEVER && python bin/buildout
+RUN cd /src && ln -s Zope2-$ZOPEVER Zope
 
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib
@@ -45,4 +41,4 @@ ADD zope.conf /src/zope.conf
 
 EXPOSE 8080
 VOLUME /zope
-ENTRYPOINT /src/run
+CMD /src/run
