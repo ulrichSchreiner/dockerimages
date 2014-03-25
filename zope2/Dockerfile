@@ -34,8 +34,8 @@ RUN pip install PIL==1.1.7
 RUN useradd zope
 RUN echo "zope:zope" | chpasswd
 
-RUN mkdir /zope
-RUN chown zope:zope /zope
+#RUN mkdir /zope
+#RUN chown zope:zope /zope
 ADD run /src/run
 ADD zope.conf /src/zope.conf
 
