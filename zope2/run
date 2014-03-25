@@ -3,9 +3,11 @@
 ZOPE_HOME="/zope"
 INSTANCE_HOME="$ZOPE_HOME/instance"
 ZOPEBIN="/src/Zope/bin"
+PYTHON="$ZOPEBIN/zopepy"
 
 CONFIG_FILE="$INSTANCE_HOME/etc/zope.conf"
 export INSTANCE_HOME
+export PYTHON
 
 if [ ! -d "$INSTANCE_HOME/etc" ]; then
   $ZOPEBIN/mkzopeinstance -u zope:2epoz -d $INSTANCE_HOME
@@ -13,6 +15,5 @@ if [ ! -d "$INSTANCE_HOME/etc" ]; then
   chown -R zope:zope $ZOPE_HOME
 fi
 
-
-exec $ZOPEBIN/runzope -C "$CONFIG_FILE" "$@" 
+exec $ZOPEBIN/zopectl -C "$CONFIG_FILE" fg
 
