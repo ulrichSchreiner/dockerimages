@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
   locales \
   python-pip \
   zip \
-  libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev
+  libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev python-dev curl python-imaging
 
 ENV LC_ALL C.UTF-8
 
@@ -29,7 +29,6 @@ RUN cd /src && ln -s Zope2-$ZOPEVER Zope
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib
-RUN pip --allow-external PIL --allow-unverified install PIL==1.1.7
 
 RUN useradd zope
 RUN echo "zope:zope" | chpasswd
