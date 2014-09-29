@@ -29,7 +29,7 @@ RUN cd /src && ln -s Zope2-$ZOPEVER Zope
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib
 RUN ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib
-RUN pip install PIL==1.1.7
+RUN pip --allow-external PIL --allow-unverified install PIL==1.1.7
 
 RUN useradd zope
 RUN echo "zope:zope" | chpasswd
