@@ -1,6 +1,7 @@
 FROM fedora:20
 
 RUN yum --enablerepo=fedora clean metadata
-RUN yum -y install rhnpush java-1.7.0-openjdk maven git socat wget || echo OK
+RUN yum -y install rhnpush java-1.7.0-openjdk maven git socat wget sudo || echo OK
+RUN  sed -i "s/Defaults    requiretty.*/ #Defaults    requiretty/g" /etc/sudoers
 
 CMD ["/bin/bash"]
