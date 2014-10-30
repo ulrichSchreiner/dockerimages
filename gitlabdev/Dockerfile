@@ -41,11 +41,16 @@ RUN sed -i -e "s/secure password/git/g" /home/git/gitlab/config/database.yml
 RUN sudo -u git -H bundle install --deployment --without development test postgres aws
 RUN sudo -u git -H bundle exec rake gitlab:shell:install[v2.0.0] REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production
 
-RUN service redis-server start && service mysql start && echo "yes" | sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production
+RUN service redis-server start && service mysql start && echo "yes" | sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production GITLAB_ROOT_PASSWORD=start123
 RUN sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab
 RUN sudo -u git -H bundle exec rake assets:precompile RAILS_ENV=production
 
 RUN sed -i -s 's/127.0.0.1/0.0.0.0/g' /home/git/gitlab/config/unicorn.rb
+
+RUN sed -i -s 's/port: 80/port: 8080/g' /home/git/gitlab/config/gitlab.yml
+RUN sed -i -s 's/# ssh_port: 22/ssh_port: 1022/g' /home/git/gitlab/config/gitlab.yml
+RUN sed -i -s 's/Port 22/Port 1022/g' /etc/ssh/sshd_config
+RUN sed -i -s 's/localhost/localhost:8080/g' /home/git/gitlab-shell/config.yml
 
 ADD startup.sh /home/git/startup.sh
 
