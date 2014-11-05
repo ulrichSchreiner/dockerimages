@@ -53,6 +53,9 @@ RUN sed -i -s 's/Port 22/Port 1022/g' /etc/ssh/sshd_config
 RUN sed -i -s 's/localhost/localhost:8080/g' /home/git/gitlab-shell/config.yml
 
 ADD startup.sh /home/git/startup.sh
+ADD noconfirm.patch /home/git/gitlab/lib/api/noconfirm.patch
+
+RUN cd /home/git/gitlab/lib/api && patch < noconfirm.patch
 
 EXPOSE 8080
 CMD /home/git/startup.sh
