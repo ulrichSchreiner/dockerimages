@@ -10,4 +10,4 @@ RUN npm install -g less autoprefixer
 RUN npm install -g less-plugin-clean-css
 RUN curl https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz |tar -C /usr/local -xz
 RUN gem install fpm
-
+ENV PATH /usr/local/go/bin/:$PATH
