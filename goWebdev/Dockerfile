@@ -4,7 +4,7 @@ RUN rm -rf /var/cache/apt/archives/partials
 RUN rm -rf /var/lib/apt/lists/partial/*
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get clean && apt-get update && apt-get -y --fix-missing install \
-  npm nodejs curl git mercurial zip ruby-dev build-essential python-pip python-dev rpm ssh libyaml-dev
+  npm nodejs curl git mercurial zip ruby-dev build-essential python-pip python-dev rpm ssh libyaml-dev docker-io
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g less autoprefixer
 RUN npm install -g less-plugin-clean-css
