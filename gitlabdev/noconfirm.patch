@@ -1,9 +1,9 @@
---- users.rb    2014-10-30 12:46:55.000000000 +0000
-+++ users2.rb   2014-11-05 15:43:01.699030483 +0000
-@@ -62,6 +62,7 @@
-         user = User.build_user(attrs)
-         admin = attrs.delete(:admin)
-         user.admin = admin unless admin.nil?
+--- users.rb    2015-01-29 11:50:20.160998791 +0100
++++ users2.rb   2015-01-29 11:51:12.044999470 +0100
+@@ -69,6 +69,7 @@
+           user.identities.build(identity_attrs)
+         end
+ 
 +       user.skip_confirmation!
          if user.save
            present user, with: Entities::UserFull

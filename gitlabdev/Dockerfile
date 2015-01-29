@@ -15,7 +15,7 @@ RUN echo 'unixsocket /var/run/redis/redis.sock' >> /etc/redis/redis.conf
 RUN service redis-server restart
 RUN usermod -aG redis git
 WORKDIR /home/git
-RUN sudo -u git -H git clone https://gitlab.com/gitlab-org/gitlab-ce.git -b 7-3-stable gitlab
+RUN sudo -u git -H git clone https://gitlab.com/gitlab-org/gitlab-ce.git -b 7-7-stable gitlab
 RUN sed -i -e 's/password_expires_at/#password_expires/g' /home/git/gitlab/db/fixtures/production/001_admin.rb
 RUN cp /home/git/gitlab/config/gitlab.yml.example /home/git/gitlab/config/gitlab.yml
 WORKDIR /home/git/gitlab
@@ -39,7 +39,7 @@ RUN sudo -u git cp /home/git/gitlab/config/database.yml.mysql /home/git/gitlab/c
 RUN sed -i -e "s/secure password/git/g" /home/git/gitlab/config/database.yml
 
 RUN sudo -u git -H bundle install --deployment --without development test postgres aws
-RUN sudo -u git -H bundle exec rake gitlab:shell:install[v2.0.0] REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production
+RUN sudo -u git -H bundle exec rake gitlab:shell:install[v2.4.1] REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production
 
 RUN service redis-server start && service mysql start && echo "yes" | sudo -u git -H bundle exec rake gitlab:setup RAILS_ENV=production GITLAB_ROOT_PASSWORD=start123
 RUN sudo cp lib/support/init.d/gitlab /etc/init.d/gitlab
@@ -58,4 +58,6 @@ ADD noconfirm.patch /home/git/gitlab/lib/api/noconfirm.patch
 RUN cd /home/git/gitlab/lib/api && patch < noconfirm.patch
 
 EXPOSE 8080
+EXPOSE 1022
+
 CMD /home/git/startup.sh
