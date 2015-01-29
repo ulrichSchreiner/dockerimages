@@ -1,10 +1,7 @@
 FROM ubuntu:14.04
 
-RUN rm -rf /var/cache/apt/archives/partials
-RUN rm -rf /var/lib/apt/lists/partial/*
-RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get clean && apt-get update && apt-get -y --fix-missing install \
-  npm nodejs curl git mercurial zip ruby-dev build-essential python-pip python-dev rpm ssh libyaml-dev apt-transport-https
+  npm nodejs curl git mercurial zip ruby-dev build-essential python-pip python-dev rpm ssh libyaml-dev apt-transport-https || /bin/true
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g less autoprefixer
 RUN npm install -g less-plugin-clean-css
