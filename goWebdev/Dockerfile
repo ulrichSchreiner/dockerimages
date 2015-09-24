@@ -5,7 +5,7 @@ RUN apt-get clean && apt-get update && apt-get -y --fix-missing install \
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g less autoprefixer
 RUN npm install -g less-plugin-clean-css
-RUN curl https://storage.googleapis.com/golang/go1.4.1.linux-amd64.tar.gz |tar -C /usr/local -xz
+RUN curl https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz |gar -C /usr/local -xz
 RUN gem install fpm
 RUN mkdir /work
 RUN cd /work && mkdir src pkg bin
