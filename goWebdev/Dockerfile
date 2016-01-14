@@ -4,7 +4,7 @@ RUN apt-get clean && apt-get update && apt-get -y --fix-missing install \
   npm nodejs curl git mercurial zip ruby-dev build-essential python-pip python-dev rpm ssh libyaml-dev apt-transport-https || /bin/true
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 RUN npm install -g less autoprefixer less-plugin-clean-css postcss-cli
-RUN curl https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz |tar -C /usr/local -xz
+RUN curl https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz |tar -C /usr/local -xz
 RUN gem install fpm
 RUN mkdir /work
 RUN cd /work && mkdir src pkg bin
