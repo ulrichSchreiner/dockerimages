@@ -36,7 +36,7 @@ distros you often need this, because ansible requires a python2 installation on 
 Now run your playbook. You must start the image in the same directory with your configuration files. As they are mounted into the 
 container, you cannot reference files on your hosts system:
 ```bash
-ansible --ask-become-pass -i inventory site.yaml
+ansible-playbook --ask-become-pass -i inventory site.yaml
 SUDO password: 
 
 PLAY ***************************************************************************
