@@ -4,11 +4,11 @@ Use this container to run playbooks (and only playbooks). You should have a runn
 
 Put this in your `.bashrc`:
 ```bash
-_ansible() {
+_ansible_playbook() {
   docker run -it --rm -v $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent -v `pwd`:/work ulrichschreiner/ansible-playbook "$@"
 }
 
-alias ansible-playbook=_ansible
+alias ansible-playbook=_ansible_playbook
 ```
 
 Now create an inventory:
