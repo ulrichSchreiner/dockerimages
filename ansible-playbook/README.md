@@ -8,7 +8,7 @@ _ansible() {
   docker run -it --rm -v $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent -v `pwd`:/work ulrichschreiner/ansible-playbook "$@"
 }
 
-alias ansible=_ansible
+alias ansible-playbook=_ansible
 ```
 
 Now create an inventory:
