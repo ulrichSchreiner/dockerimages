@@ -30,7 +30,8 @@ and create a playbook:
     - shell: echo "Hello "
 ```
 
-Note: in this example i install a python2 in a `pre_tasks` with `gather_facts: no`. This is only an example!
+Note: in this example i install a python2 in a `pre_tasks` with `gather_facts: no`. This is only an example, but for current linux
+distros you often need this, because ansible requires a python2 installation on the target system.
 
 Now run your playbook. You must start the image in the same directory with your configuration files. As they are mounted into the 
 container, you cannot reference files on your hosts system:
