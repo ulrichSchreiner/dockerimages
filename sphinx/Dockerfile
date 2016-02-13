@@ -1,11 +1,19 @@
-FROM ubuntu:14.04
+FROM ubuntu:15.10
+MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
-RUN apt update
-RUN apt install -y python-pip
-RUN apt install -y texlive texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-lang* 
-RUN apt install -y git wget
-RUN pip install Sphinx
-RUN pip install sphinx_bootstrap_theme
+RUN apt-get update && apt-get install --yes --no-install-recommends \
+	git \
+	make \
+	python-pip \
+	texlive \
+	texlive-fonts-recommended \
+	texlive-lang* \
+	texlive-latex-extra \
+	texlive-latex-recommended \
+	wget \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN pip install Sphinx sphinx_bootstrap_theme sphinx_rtd_theme alabaster
 RUN mkdir /doc
 WORKDIR /doc
 
