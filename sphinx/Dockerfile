@@ -14,6 +14,6 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 RUN pip install Sphinx sphinx_bootstrap_theme sphinx_rtd_theme alabaster
-RUN mkdir /doc
+RUN mkdir /doc && chmod 777 /doc
 WORKDIR /doc
 
