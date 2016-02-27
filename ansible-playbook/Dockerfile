@@ -5,6 +5,7 @@ RUN apk add --update \
 	build-base \
 	ca-certificates \
 	krb5-dev \
+	openssh \
 	openssl \
 	py-pip \
 	python \
