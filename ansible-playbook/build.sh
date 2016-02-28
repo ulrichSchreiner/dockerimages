@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t ulrichschreiner/ansible-playbook .
+docker build -t ulrichschreiner/ansible .

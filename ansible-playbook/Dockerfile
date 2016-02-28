@@ -19,9 +19,10 @@ ENV KERBEROS_VERSION 1.2.2
 RUN 	pip install "ansible==$ANSIBLE_VERSION" && \
 	pip install "pywinrm>=$WINRM_MIN_VERSION" && \
 	pip install "kerberos==$KERBEROS_VERSION"
-	
+
 VOLUME /work
 WORKDIR /work
 
 ENV  ANSIBLE_HOST_KEY_CHECKING False
-ENTRYPOINT [ "/usr/bin/ansible-playbook" ]
+COPY entry.sh /entry.sh
+ENTRYPOINT ["/entry.sh"]

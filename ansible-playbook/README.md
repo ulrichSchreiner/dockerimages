@@ -1,14 +1,36 @@
 # Ansible Playbook Container
 
-Use this container to run playbooks (and only playbooks). You should have a running `ssh-agent` to connect to your hosts.
+Use this container to run ansbile playbooks or other related commands. You should have a running `ssh-agent` to connect to your hosts.
 
 Put this in your `.bashrc`:
 ```bash
-_ansible_playbook() {
-  docker run -it --rm -v $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent -v `pwd`:/work ulrichschreiner/ansible-playbook "$@"
+_ansible() {
+  subc=$1
+  shift
+  docker run -it --rm -v $SSH_AUTH_SOCK:/ssh-agent --env SSH_AUTH_SOCK=/ssh-agent -v `pwd`:/work ulrichschreiner/ansible $subc "$@"
 }
-
+_ansible_playbook() {
+  _ansible playbook "$@"
+}
+_ansible_vault() {
+  _ansible vault "$@"
+}
+_ansible_doc() {
+  _ansible doc "$@"
+}
+_ansible_pull() {
+  _ansible pull "$@"
+}
+_ansible_galaxy() {
+  _ansible galaxy "$@"
+}
 alias ansible-playbook=_ansible_playbook
+alias ansible-vault=_ansible_vault
+alias ansible-doc=_ansible_doc
+alias ansible-pull=_ansible_pull
+alias ansible-galaxy=_ansible_galaxy
+alias ansible=_ansible
+
 ```
 
 Now create an inventory:
@@ -33,11 +55,11 @@ and create a playbook:
 Note: in this example i install a python2 in a `pre_tasks` with `gather_facts: no`. This is only an example, but for current linux
 distros you often need this, because ansible requires a python2 installation on the target system.
 
-Now run your playbook. You must start the image in the same directory with your configuration files. As they are mounted into the 
+Now run your playbook. You must start the image in the same directory with your configuration files. As they are mounted into the
 container, you cannot reference files on your hosts system:
 ```bash
 ansible-playbook --ask-become-pass -i inventory site.yaml
-SUDO password: 
+SUDO password:
 
 PLAY ***************************************************************************
 
