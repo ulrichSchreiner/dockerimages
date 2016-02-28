@@ -1,6 +1,10 @@
 # Ansible Playbook Container
 
-Use this container to run ansbile playbooks or other related commands. You should have a running `ssh-agent` to connect to your hosts.
+Use this container to run ansbile playbooks or other related commands. You
+should have a running `ssh-agent` to connect to your hosts. Give this
+container the name of the ansible subcommand (`playbook`, `vault`, ...). If
+there is no such subcommand the container will call the plain `ansible` command
+with the given parameters.
 
 Put this in your `.bashrc`:
 ```bash
