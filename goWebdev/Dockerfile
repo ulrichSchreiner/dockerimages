@@ -1,16 +1,29 @@
-FROM ubuntu:14.04
+FROM debian:jessie
 
-RUN apt-get clean && apt-get update && apt-get -y --fix-missing install \
-  npm nodejs curl git mercurial zip ruby-dev build-essential python-pip python-dev rpm ssh libyaml-dev apt-transport-https || /bin/true
-RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN npm install -g less autoprefixer less-plugin-clean-css postcss-cli
-RUN curl https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz |tar -C /usr/local -xz
-RUN gem install fpm
-RUN mkdir /work
-RUN cd /work && mkdir src pkg bin
-ENV GOPATH /work
-ENV PATH /usr/local/go/bin/:/work/bin:$PATH
-RUN sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
-RUN apt-get update
-RUN apt-get -y --force-yes install lxc-docker
+MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
+
+ENV GO_VERSION 1.6.1
+ENV GB_VERSION 0.4.0
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    bzr \
+    ca-certificates \
+    curl \
+    git \
+    mercurial \
+    nodejs \
+    npm \
+    ssh \
+    zip \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s /usr/bin/nodejs /usr/bin/node \
+    && npm install -g webpack \
+    && curl https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz | tar -C /usr/local -xz \
+    && mkdir -p /go/src /go/pkg /go/bin \
+    && GOPATH=/go PATH=/usr/local/go/bin:$PATH go get \
+      github.com/constabulary/gb/... \
+    && rm -rf /go/pkg/*
+    
 
