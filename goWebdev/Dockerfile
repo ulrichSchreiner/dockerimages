@@ -28,6 +28,6 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/s
     && GOPATH=/go PATH=/usr/local/go/bin:$PATH go get \
       github.com/constabulary/gb/... \
     && rm -rf /go/pkg/* \
-    && curl -sSL -O https://get.docker.com/builds/Linux/x86_64/docker-1.11.0.tgz && tar zxf docker-1.11.0.tgz -C /
+    && curl -sSL https://get.docker.com/builds/Linux/x86_64/docker-1.11.1 >/usr/bin/docker
     
 
