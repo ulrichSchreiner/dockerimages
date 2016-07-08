@@ -4,7 +4,7 @@ MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
 ENV GO_VERSION 1.6.2
 ENV GB_VERSION 0.4.0
-ENV GLIDE_VERSION 0.11.0
+ENV GLIDE_VERSION v0.11.0
 ENV NODE_VERSION node_5.x
 
 RUN apt-get update && \
