@@ -28,7 +28,9 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/s
     && mkdir -p /go/src /go/pkg /go/bin \
     && GOPATH=/go PATH=/usr/local/go/bin:$PATH go get \
       github.com/constabulary/gb/... \
+      github.com/kardianos/govendor \
     && rm -rf /go/pkg/* \
+    && ln -sf /go/bin/* /usr/bin/ \
     && curl -sSL https://get.docker.com/builds/Linux/x86_64/docker-1.11.1.tgz | tar -xzC /tmp \
     && mv /tmp/docker/* /usr/bin/ \
     && rm -rf /tmp/docker \
