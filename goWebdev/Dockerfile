@@ -4,7 +4,7 @@ MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
 ENV GO_VERSION 1.6.2
 ENV GB_VERSION 0.4.0
-ENV GLIDE_VERSION v0.11.0
+ENV GLIDE_VERSION v0.11.1
 ENV NODE_VERSION node_5.x
 
 RUN apt-get update && \
@@ -31,9 +31,7 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/s
       github.com/kardianos/govendor \
     && rm -rf /go/pkg/* \
     && ln -sf /go/bin/* /usr/bin/ \
-    && curl -sSL https://get.docker.com/builds/Linux/x86_64/docker-1.11.1.tgz | tar -xzC /tmp \
-    && mv /tmp/docker/* /usr/bin/ \
-    && rm -rf /tmp/docker \
+    && curl -sSL https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar -xzC /usr/bin --strip-components=1 \
     && curl -sSL https://github.com/Masterminds/glide/releases/download/${GLIDE_VERSION}/glide-${GLIDE_VERSION}-linux-amd64.tar.gz \
        | tar --strip-components 1 -C /usr/bin -xzv
     
