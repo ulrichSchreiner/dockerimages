@@ -2,10 +2,10 @@ FROM debian:jessie
 
 MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
-ENV GO_VERSION 1.7
+ENV GO_VERSION 1.7.1
 ENV GB_VERSION 0.4.3
-ENV GLIDE_VERSION v0.11.1
-ENV NODE_VERSION node_5.x
+ENV GLIDE_VERSION v0.12.2
+ENV NODE_VERSION node_6.x
 
 RUN apt-get update && \
     apt-get -y install apt-transport-https ca-certificates curl --no-install-recommends && \
@@ -14,13 +14,19 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/s
     apt-get update && apt-get install -y \
     build-essential \
     bzr \
+    gcc \
     git \
+    make \
     mercurial \
     nodejs \
+    rpm \
+    ruby-dev \
+    rubygems \
     ssh \
     tar \
     zip \
     --no-install-recommends \
+    && gem install fpm \
     && rm -rf /var/lib/apt/lists/* \
     #&& ln -s /usr/bin/nodejs /usr/bin/node \
     && npm install -g webpack \
@@ -36,3 +42,4 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/s
        | tar --strip-components 1 -C /usr/bin -xzv
     
 ENV PATH $PATH:/usr/local/go/bin
+CMD ["bash"]
