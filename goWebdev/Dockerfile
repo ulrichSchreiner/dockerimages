@@ -7,11 +7,12 @@ ENV GB_VERSION 0.4.3
 ENV GLIDE_VERSION v0.12.3
 ENV NODE_VERSION node_6.x
 
-RUN apt-get update && \
+RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >>/etc/apt/sources.list && \
+    apt-get update && \
     apt-get -y install apt-transport-https ca-certificates curl --no-install-recommends && \
     curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
 RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/sources.list.d/addons.list && \
-    apt-get update && apt-get install -y \
+    apt-get update && apt-get -t jessie-backports -y install \
     build-essential \
     bzr \
     gcc \
