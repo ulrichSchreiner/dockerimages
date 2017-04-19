@@ -19,14 +19,14 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/s
     git \
     make \
     mercurial \
-    nodejs \
     rpm \
     ruby-dev \
     rubygems \
     ssh \
     tar \
     zip \
-    --no-install-recommends \
+    --no-install-recommends 
+RUN apt-get -y install nodejs \
     && gem install fpm \
     && rm -rf /var/lib/apt/lists/* \
     #&& ln -s /usr/bin/nodejs /usr/bin/node \
