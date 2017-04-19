@@ -29,11 +29,12 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/s
     && gem install fpm \
     && rm -rf /var/lib/apt/lists/* \
     #&& ln -s /usr/bin/nodejs /usr/bin/node \
-    && npm install -g webpack \
+    && npm install -g webpack less \
     && curl https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz | tar -C /usr/local -xz \
     && mkdir -p /go/src /go/pkg /go/bin \
     && GOPATH=/go PATH=/usr/local/go/bin:$PATH go get \
       github.com/constabulary/gb/... \
+      github.com/golang/dep/... \
       github.com/kardianos/govendor \
     && rm -rf /go/pkg/* \
     && ln -sf /go/bin/* /usr/bin/ \
