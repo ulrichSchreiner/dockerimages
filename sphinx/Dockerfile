@@ -1,4 +1,4 @@
-FROM ubuntu:15.10
+FROM ubuntu:17.04
 MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
 RUN apt-get update && apt-get install --yes --no-install-recommends \
@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
 	git \
 	make \
 	python-pip \
+	python-setuptools \
 	texlive \
 	texlive-fonts-recommended \
 	texlive-lang* \
@@ -14,7 +15,7 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
 	wget \
   && rm -rf /var/lib/apt/lists/*
 
-RUN pip install Sphinx sphinx_bootstrap_theme sphinx_rtd_theme alabaster recommonmark
+RUN pip install wheel && pip install Sphinx sphinx_bootstrap_theme sphinx_rtd_theme alabaster recommonmark
 RUN mkdir /doc && chmod 777 /doc
 WORKDIR /doc
 
