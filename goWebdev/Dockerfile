@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
-ENV GO_VERSION 1.9.1
+ENV GO_VERSION 1.9.2
 ENV GB_VERSION 0.4.3
 ENV GLIDE_VERSION v0.12.3
 ENV NODE_VERSION node_6.x
