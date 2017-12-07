@@ -39,7 +39,8 @@ RUN apt-get -y install nodejs \
       github.com/kardianos/govendor \
     && rm -rf /go/pkg/* \
     && ln -sf /go/bin/* /usr/bin/ \
-    && curl -sSL https://get.docker.com/builds/Linux/x86_64/docker-1.11.2.tgz | tar -xzC /usr/bin --strip-components=1 \
+    && curl -sSL https://download.docker.com/linux/static/stable/x86_64/docker-17.09.0-ce.tgz | tar -xzC /usr/bin --strip-components=1 docker/docker \
+    && chmod +x /usr/bin/docker \
     && curl -sSL https://github.com/Masterminds/glide/releases/download/${GLIDE_VERSION}/glide-${GLIDE_VERSION}-linux-amd64.tar.gz \
        | tar --strip-components 1 -C /usr/bin -xzv
     
