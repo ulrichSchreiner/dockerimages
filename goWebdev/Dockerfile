@@ -43,6 +43,8 @@ RUN apt-get -y install nodejs \
     && chmod +x /usr/bin/docker \
     && curl -sSL https://github.com/Masterminds/glide/releases/download/${GLIDE_VERSION}/glide-${GLIDE_VERSION}-linux-amd64.tar.gz \
        | tar --strip-components 1 -C /usr/bin -xzv
-    
+
+COPY gopath.sh /usr/bin/gopath.sh
+
 ENV PATH $PATH:/usr/local/go/bin
 CMD ["bash"]
