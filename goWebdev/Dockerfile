@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
-ENV GO_VERSION=1.9.2 \
+ENV GO_VERSION=1.9.3 \
     GLIDE_VERSION=v0.12.3 \
     NODE_VERSION=node_8.x \
     DOCKER_VERSION=17.09.1
