@@ -1,41 +1,41 @@
-FROM debian:jessie
+FROM debian:stretch-backports
 
 MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
 ENV GO_VERSION=1.9.4 \
     GLIDE_VERSION=v0.12.3 \
-    NODE_VERSION=node_8.x \
-    DOCKER_VERSION=17.09.1
+    NODE_VERSION=node_9.x \
+    DOCKER_VERSION=17.12.0 \
+    DEP_VERSION=0.4.1
 
-RUN echo "deb http://ftp.debian.org/debian jessie-backports main" >>/etc/apt/sources.list && \
-    apt-get update && \
-    apt-get -y install apt-transport-https ca-certificates curl --no-install-recommends && \
+RUN apt-get update && \
+    apt-get -y install apt-transport-https ca-certificates curl gnupg2 && \
     curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
-RUN echo "deb https://deb.nodesource.com/$NODE_VERSION jessie main" >>/etc/apt/sources.list.d/addons.list && \
-    apt-get update && apt-get -t jessie-backports -y install \
+RUN echo "deb https://deb.nodesource.com/$NODE_VERSION stretch main" >>/etc/apt/sources.list.d/addons.list && \
+    apt-get update && apt-get -y install \
+    autoconf \
+    autotools-dev \
     build-essential \
     bzr \
     gcc \
     git \
+    libtool \
     make \
     mercurial \
     rpm \
+    ruby \
     ruby-dev \
     rubygems \
     ssh \
     tar \
-    zip \
-    --no-install-recommends 
+    zip 
 RUN apt-get -y install nodejs \
-    && gem install fpm \
+    && gem install --no-ri --no-doc fpm \
     && rm -rf /var/lib/apt/lists/* \
     && npm install -g webpack less \
-    && curl https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz | tar -C /usr/local -xz \
-    && mkdir -p /go/src /go/pkg /go/bin \
-    && GOPATH=/go PATH=/usr/local/go/bin:$PATH go get \
-      github.com/golang/dep/... \
-    && rm -rf /go/pkg/* \
-    && ln -sf /go/bin/* /usr/bin/ \
+    && curl -sSL https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz | tar -C /usr/local -xz \
+    && curl -sSL https://github.com/golang/dep/releases/download/v${DEP_VERSION}/dep-linux-amd64 > /usr/bin/dep \
+    && chmod +x /usr/bin/dep \
     && curl -sSL https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}-ce.tgz | tar -xzC /usr/bin --strip-components=1 docker/docker \
     && chmod +x /usr/bin/docker \
     && curl -sSL https://github.com/Masterminds/glide/releases/download/${GLIDE_VERSION}/glide-${GLIDE_VERSION}-linux-amd64.tar.gz \
