@@ -20,3 +20,4 @@ cd "$GOPATH"/src/"$GITHOST"/"$CI_PROJECT_NAMESPACE"
 ln -s "$CI_PROJECT_DIR" .
 cd "$CI_PROJECT_NAME"
 
+echo -e "machine ${GITHOST}\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > ~/.netrc
