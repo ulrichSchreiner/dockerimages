@@ -6,12 +6,15 @@ ENV GO_VERSION=1.10.1 \
     GLIDE_VERSION=v0.12.3 \
     NODE_VERSION=node_9.x \
     DOCKER_VERSION=17.12.0 \
-    DEP_VERSION=0.4.1
+    DEP_VERSION=0.4.1 \
+    HELM_VERSION=2.8.2
 
 RUN apt-get update && \
     apt-get -y install apt-transport-https ca-certificates curl gnupg2 && \
-    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 RUN echo "deb https://deb.nodesource.com/$NODE_VERSION stretch main" >>/etc/apt/sources.list.d/addons.list && \
+    echo "deb http://apt.kubernetes.io/ kubernetes-stretch main" >>/etc/apt/sources.list.d/kubernetes.list && \
     apt-get update && apt-get -y install \
     autoconf \
     autotools-dev \
@@ -19,6 +22,7 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION stretch main" >>/etc/apt/
     bzr \
     gcc \
     git \
+    kubectl \
     libtool \
     make \
     mercurial \
@@ -39,7 +43,9 @@ RUN apt-get -y install nodejs \
     && curl -sSL https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}-ce.tgz | tar -xzC /usr/bin --strip-components=1 docker/docker \
     && chmod +x /usr/bin/docker \
     && curl -sSL https://github.com/Masterminds/glide/releases/download/${GLIDE_VERSION}/glide-${GLIDE_VERSION}-linux-amd64.tar.gz \
-       | tar --strip-components 1 -C /usr/bin -xzv
+       | tar --strip-components 1 -C /usr/bin -xzv \
+    && curl -sSL https://storage.googleapis.com/kubernetes-helm/helm-v${HELM_VERSION}-linux-amd64.tar.gz \
+       | tar --strip-components 1 -xzC /usr/bin linux-amd64/helm
 
 COPY gopath.sh /usr/bin/gopath.sh
 
