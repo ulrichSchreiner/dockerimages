@@ -21,6 +21,7 @@ RUN echo "deb https://deb.nodesource.com/$NODE_VERSION stretch main" >>/etc/apt/
     build-essential \
     bzr \
     gcc \
+    gettext-base \
     git \
     kubectl \
     libtool \
