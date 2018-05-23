@@ -41,6 +41,8 @@ RUN apt-get -y install nodejs \
     && curl -sSL https://storage.googleapis.com/golang/go${GO_VERSION}.linux-amd64.tar.gz | tar -C /usr/local -xz \
     && curl -sSL https://github.com/golang/dep/releases/download/v${DEP_VERSION}/dep-linux-amd64 > /usr/bin/dep \
     && chmod +x /usr/bin/dep \
+    && /usr/local/go/bin/go get -u golang.org/x/vgo \
+    && ln -sf /root/go/bin/* /usr/bin/ \
     && curl -sSL https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}-ce.tgz | tar -xzC /usr/bin --strip-components=1 docker/docker \
     && chmod +x /usr/bin/docker \
     && curl -sSL https://github.com/Masterminds/glide/releases/download/${GLIDE_VERSION}/glide-${GLIDE_VERSION}-linux-amd64.tar.gz \
