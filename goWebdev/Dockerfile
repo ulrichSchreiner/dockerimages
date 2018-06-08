@@ -2,12 +2,12 @@ FROM debian:stretch-backports
 
 MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
-ENV GO_VERSION=1.10.2 \
+ENV GO_VERSION=1.10.3 \
     GLIDE_VERSION=v0.12.3 \
     NODE_VERSION=node_9.x \
-    DOCKER_VERSION=18.03.0 \
+    DOCKER_VERSION=18.03.1 \
     DEP_VERSION=0.4.1 \
-    HELM_VERSION=2.8.2
+    HELM_VERSION=2.9.1
 
 RUN apt-get update && \
     apt-get -y install apt-transport-https ca-certificates curl gnupg2 && \
