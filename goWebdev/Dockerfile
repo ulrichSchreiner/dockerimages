@@ -2,7 +2,7 @@ FROM debian:stretch-backports
 
 MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
-ENV GO_VERSION=1.10.2 \
+ENV GO_VERSION=1.10.3 \
     GLIDE_VERSION=v0.12.3 \
     NODE_VERSION=node_10.x \
     DOCKER_VERSION=18.06.0 \
