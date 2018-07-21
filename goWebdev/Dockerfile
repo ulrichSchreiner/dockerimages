@@ -4,10 +4,10 @@ MAINTAINER Ulrich Schreiner <ulrich.schreiner@gmail.com>
 
 ENV GO_VERSION=1.10.2 \
     GLIDE_VERSION=v0.12.3 \
-    NODE_VERSION=node_9.x \
-    DOCKER_VERSION=18.03.0 \
+    NODE_VERSION=node_10.x \
+    DOCKER_VERSION=18.06.0 \
     DEP_VERSION=0.4.1 \
-    HELM_VERSION=2.8.2
+    HELM_VERSION=2.9.1
 
 RUN apt-get update && \
     apt-get -y install apt-transport-https ca-certificates curl gnupg2 && \
